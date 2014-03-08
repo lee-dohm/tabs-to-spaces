@@ -17,12 +17,21 @@ class TabsToSpaces
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
-    spaces = Array(atom.config.get('editor.tabLength') + 1).join(' ')
+    @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
     editor.transact =>
       editor.selectAll()
       editor.splitSelectionsIntoLines()
       @replaceTabsWithSpaces(selection) for selection in editor.getSelections()
     editor.setCursorBufferPosition([0, 0])
+
+  # Creates a string containing `text` concatenated `count` times.
+  #
+  # @private
+  # @param [String] text Text to repeat.
+  # @paarm [Number] count Number of times to repeat.
+  # @return [String] Repeated text.
+  multiplyText: (text, count) ->
+    Array(count + 1).join(text)
 
   # Replaces all leading tabs with spaces in the given selection.
   #
@@ -31,7 +40,7 @@ class TabsToSpaces
   replaceTabsWithSpaces: (selection) ->
     text = selection.getText()
     newText = text.replace /^\t+/, ''
-    indentation = Array(text.length - newText.length + 1).join(spaces)
+    indentation = @multiplyText(spaces, text.length - newText.length)
     selection.insertText(indentation + newText)
     selection.clear()
 
