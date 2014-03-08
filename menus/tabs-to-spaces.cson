@@ -1,0 +1,15 @@
+'context-menu':
+  '.overlayer':
+      'Convert Tabs to Spaces': 'tabs-to-spaces:convert'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Tabs to Spaces'
+      'submenu': [
+        { 'label': 'Convert', 'command': 'tabs-to-spaces:convert' }
+      ]
+    ]
+  }
+]
