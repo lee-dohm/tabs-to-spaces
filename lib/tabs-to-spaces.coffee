@@ -26,4 +26,7 @@ class TabsToSpaces
     selection.insertText(indentation + newText)
     selection.clear()
 
+  setSpaces: (spcs) ->
+    spaces = spcs
+
 module.exports = new TabsToSpaces
