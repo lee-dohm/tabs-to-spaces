@@ -1,7 +1,7 @@
 {
   "name": "tabs-to-spaces",
   "main": "./lib/tabs-to-spaces",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Provides the ability to convert all tabs to spaces in a document",
   "activationEvents": [
     "tabs-to-spaces:untabify"
