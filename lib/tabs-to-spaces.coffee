@@ -10,9 +10,7 @@ class TabsToSpaces
   activate: ->
     atom.workspaceView.command 'tabs-to-spaces:untabify', => @untabify()
 
-  # Converts all leading tabs to spaces in the current editor window.
-  #
-  # Sets the cursor position to the top of the file when complete.
+  # Converts all leading tabs to spaces in the current editor.
   untabify: ->
     editor = atom.workspace.getActiveEditor()
     return unless editor?
@@ -31,10 +29,10 @@ class TabsToSpaces
   multiplyText: (text, count) ->
     Array(count + 1).join(text)
 
-  # Replaces all leading tabs with spaces in the given selection.
+  # Replaces all leading tabs with spaces in the given buffer.
   #
   # @private
-  # @param [Selection] selection Selection within which to replace tabs with spaces.
+  # @param [TextBuffer] buffer Buffer within which to replace tabs with spaces.
   replaceTabsWithSpaces: (buffer) ->
     buffer.transact =>
       buffer.scan /^\t+/g, (obj) =>
