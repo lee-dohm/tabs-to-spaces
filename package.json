@@ -17,6 +17,7 @@
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-codo": "~0.1.0"
+    "grunt-codo": "~0.1.0",
+    "text-buffer": ">1.4.0"
   }
 }

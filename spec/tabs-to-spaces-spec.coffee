@@ -2,17 +2,9 @@
 # Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
 #
 
+TextBuffer = require 'text-buffer'
+
 TabsToSpaces = require '../lib/tabs-to-spaces'
-
-class MockSelection
-  constructor: (@text) ->
-
-  clear: ->
-
-  getText: ->
-    @text
-
-  insertText: (@text) ->
 
 describe 'TabsToSpaces', ->
   describe 'replaceTabsWithSpaces', ->
@@ -27,33 +19,46 @@ describe 'TabsToSpaces', ->
       ).toThrow()
 
     it 'does not change the empty string', ->
-      sel = new MockSelection('')
-      TabsToSpaces.replaceTabsWithSpaces(sel)
+      buffer = new TextBuffer('')
 
-      expect(sel.getText()).toEqual('')
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual('')
 
     it 'does not change tabs at the end of a string', ->
-      sel = new MockSelection("foobarbaz\t")
-      TabsToSpaces.replaceTabsWithSpaces(sel)
+      buffer = new TextBuffer("foobarbaz\t")
 
-      expect(sel.getText()).toEqual("foobarbaz\t")
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual("foobarbaz\t")
 
     it 'does not change tabs in the middle of a string', ->
-      sel = new MockSelection("foo\tbar\tbaz")
-      TabsToSpaces.replaceTabsWithSpaces(sel)
+      buffer = new TextBuffer("foo\tbar\tbaz")
 
-      expect(sel.getText()).toEqual("foo\tbar\tbaz")
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual("foo\tbar\tbaz")
 
     it 'changes one tab to the correct number of spaces', ->
       TabsToSpaces.setSpaces('  ')
-      sel = new MockSelection("\tfoo")
-      TabsToSpaces.replaceTabsWithSpaces(sel)
+      buffer = new TextBuffer("\tfoo")
 
-      expect(sel.getText()).toEqual('  foo')
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual('  foo')
 
     it 'changes two tabs to the correct number of spaces', ->
       TabsToSpaces.setSpaces('  ')
-      sel = new MockSelection("\t\tfoo")
-      TabsToSpaces.replaceTabsWithSpaces(sel)
+      buffer = new TextBuffer("\t\tfoo")
 
-      expect(sel.getText()).toEqual('    foo')
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual('    foo')
+
+    it 'changes multiple lines of leading tabs to spaces', ->
+      TabsToSpaces.setSpaces('  ')
+      buffer = new TextBuffer("\t\tfoo\n\t\tfoo")
+
+      TabsToSpaces.replaceTabsWithSpaces(buffer)
+
+      expect(buffer.getText()).toEqual('    foo\n    foo')

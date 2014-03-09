@@ -18,14 +18,9 @@ class TabsToSpaces
     return unless editor?
 
     @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
-    point = editor.getCursorBufferPosition()
+    buffer = editor.buffer
 
-    editor.transact =>
-      editor.selectAll()
-      editor.splitSelectionsIntoLines()
-      @replaceTabsWithSpaces(selection) for selection in editor.getSelections()
-
-    editor.setCursorBufferPosition(point)
+    @replaceTabsWithSpaces(buffer)
 
   # Creates a string containing `text` concatenated `count` times.
   #
@@ -40,12 +35,10 @@ class TabsToSpaces
   #
   # @private
   # @param [Selection] selection Selection within which to replace tabs with spaces.
-  replaceTabsWithSpaces: (selection) ->
-    text = selection.getText()
-    newText = text.replace /^\t+/, ''
-    indentation = @multiplyText(spaces, text.length - newText.length)
-    selection.insertText(indentation + newText)
-    selection.clear()
+  replaceTabsWithSpaces: (buffer) ->
+    buffer.transact =>
+      buffer.scan /^\t+/g, (obj) =>
+        obj.replace(@multiplyText(spaces, obj.matchText.length))
 
   # Sets the number of spaces to replace a single tab character with.
   #
