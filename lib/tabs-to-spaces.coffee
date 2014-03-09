@@ -8,21 +8,24 @@ class TabsToSpaces
 
   # Activates the package.
   activate: ->
-    atom.workspaceView.command 'tabs-to-spaces:convert', => @convert()
+    atom.workspaceView.command 'tabs-to-spaces:untabify', => @untabify()
 
   # Converts all leading tabs to spaces in the current editor window.
   #
   # Sets the cursor position to the top of the file when complete.
-  convert: ->
+  untabify: ->
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
     @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
+    point = editor.getCursorBufferPosition()
+
     editor.transact =>
       editor.selectAll()
       editor.splitSelectionsIntoLines()
       @replaceTabsWithSpaces(selection) for selection in editor.getSelections()
-    editor.setCursorBufferPosition([0, 0])
+
+    editor.setCursorBufferPosition(point)
 
   # Creates a string containing `text` concatenated `count` times.
   #

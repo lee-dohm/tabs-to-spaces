@@ -16,9 +16,9 @@ apm install tabs-to-spaces
 
 It converts all leading tabs to spaces in the current editor window. It can be executed from:
 
-* Command Palette &mdash; `Tabs To Spaces: Convert`
-* Packages Menu &mdash; `Packages > Tabs To Spaces > Convert Tabs to Spaces`
-* Context Menu &mdash; `Convert Tabs to Spaces`
+* Command Palette &mdash; `Tabs To Spaces: Untabify`
+* Packages Menu &mdash; `Packages > Tabs To Spaces > Untabify`
+* Context Menu &mdash; `Untabify`
 
 ## Configuration
 
