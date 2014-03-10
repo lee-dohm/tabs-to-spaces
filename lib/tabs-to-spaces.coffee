@@ -34,9 +34,18 @@ class TabsToSpaces
   # @private
   # @param [TextBuffer] buffer Buffer within which to replace tabs with spaces.
   replaceTabsWithSpaces: (buffer) ->
+    @replaceTextInBuffer buffer, /^\t+/g, (obj) =>
+      obj.replace(@multiplyText(spaces, obj.matchText.length))
+
+  # Replaces all text that matches the `regex` in `buffer` based on `callback`.
+  #
+  # @param [TextBuffer] buffer Buffer in which to replace text.
+  # @param [RegExp] regex Regular expression to match. **Must be a global regular expression.**
+  # @param [Function] callback Callback that matches the signature of the `TextBuffer.scan()` callback.
+  replaceTextInBuffer: (buffer, regex, callback) ->
     buffer.transact =>
-      buffer.scan /^\t+/g, (obj) =>
-        obj.replace(@multiplyText(spaces, obj.matchText.length))
+      buffer.scan regex, (obj) ->
+        callback(obj)
 
   # Sets the number of spaces to replace a single tab character with.
   #
