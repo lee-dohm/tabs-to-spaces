@@ -1,7 +1,7 @@
 {
   "name": "tabs-to-spaces",
   "main": "./lib/tabs-to-spaces",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Provides the ability to convert between leading tabs and spaces in a document",
   "activationEvents": [
     "tabs-to-spaces:tabify",
