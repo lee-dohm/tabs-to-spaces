@@ -1,5 +1,6 @@
 'context-menu':
   '.overlayer':
+      'Tabify': 'tabs-to-spaces:tabify'
       'Untabify': 'tabs-to-spaces:untabify'
 
 'menu': [
@@ -8,6 +9,7 @@
     'submenu': [
       'label': 'Tabs to Spaces'
       'submenu': [
+        { 'label': 'Tabify', 'command': 'tabs-to-spaces:tabify' }
         { 'label': 'Untabify', 'command': 'tabs-to-spaces:untabify' }
       ]
     ]

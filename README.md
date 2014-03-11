@@ -1,6 +1,6 @@
 # Tabs to Spaces
 
-Converts tabs to spaces.
+Converts between leading tabs and leading spaces.
 
 ## Installation
 
@@ -14,17 +14,23 @@ apm install tabs-to-spaces
 
 ## Use
 
-It converts all leading tabs to spaces in the current editor window. It can be executed from:
+It can convert between leading tabs and spaces in the current editor window. It can be executed from:
 
 * Command Palette &mdash; `Tabs To Spaces: Untabify`
-* Packages Menu &mdash; `Packages > Tabs To Spaces > Untabify`
-* Context Menu &mdash; `Untabify`
+    * `Tabs To Spaces: Tabify`
+    * `Tabs To Spaces: Untabify`
+* Packages Menu
+    * `Packages > Tabs to Spaces > Tabify`
+    * `Packages > Tabs to Spaces > Untabify`
+* Context Menu
+    * `Tabify`
+    * `Untabify`
 
 ## Configuration
 
 Tabs to Spaces uses the following configuration values:
 
-* `editor.tabLength` &mdash; sets the number of space characters it replaces a leading tab character with
+* `editor.tabLength` &mdash; sets the number of space characters a tab character is equivalent to
 
 ## Copyright
 

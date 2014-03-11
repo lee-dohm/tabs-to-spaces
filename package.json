@@ -2,14 +2,15 @@
   "name": "tabs-to-spaces",
   "main": "./lib/tabs-to-spaces",
   "version": "0.1.1",
-  "description": "Provides the ability to convert all tabs to spaces in a document",
+  "description": "Provides the ability to convert between leading tabs and spaces in a document",
   "activationEvents": [
+    "tabs-to-spaces:tabify",
     "tabs-to-spaces:untabify"
   ],
   "repository": "https://github.com/lee-dohm/tabs-to-spaces",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">0.60.0"
   },
   "dependencies": {},
   "devDependencies": {

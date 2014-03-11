@@ -8,7 +8,18 @@ class TabsToSpaces
 
   # Activates the package.
   activate: ->
+    atom.workspaceView.command 'tabs-to-spaces:tabify', => @tabify()
     atom.workspaceView.command 'tabs-to-spaces:untabify', => @untabify()
+
+  # Converts all leading spaces to tabs in the current buffer.
+  tabify: ->
+    editor = atom.workspace.getActiveEditor()
+    return unless editor?
+
+    @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
+    buffer = editor.buffer
+
+    @replaceSpacesWithTabs(buffer)
 
   # Converts all leading tabs to spaces in the current editor.
   untabify: ->
@@ -28,6 +39,17 @@ class TabsToSpaces
   # @return [String] Repeated text.
   multiplyText: (text, count) ->
     Array(count + 1).join(text)
+
+  # Replaces leading spaces with an integral number of tabs plus the
+  # a number of spaces necessary to fill in the rest of the space.
+  #
+  # @private
+  # @param [TextBuffer] buffer Buffer within which to replace the spaces with tabs.
+  replaceSpacesWithTabs: (buffer) ->
+    @replaceTextInBuffer buffer, /^ +/g, (obj) =>
+      tabs = @multiplyText("\t", obj.matchText.length // spaces.length)
+      text = tabs + @multiplyText(' ', obj.matchText.length %% spaces.length)
+      obj.replace(text)
 
   # Replaces all leading tabs with spaces in the given buffer.
   #
