@@ -63,9 +63,10 @@ class TabsToSpaces
   #
   # @param [TextBuffer] buffer Buffer in which to replace text.
   # @param [RegExp] regex Regular expression to match. **Must be a global regular expression.**
-  # @param [Function] callback Callback that matches the signature of the `TextBuffer.scan()` callback.
+  # @param [Function] callback Callback that matches the signature of the `TextBuffer.scan()`
+  #   callback.
   replaceTextInBuffer: (buffer, regex, callback) ->
-    buffer.transact =>
+    buffer.transact ->
       buffer.scan regex, (obj) ->
         callback(obj)
 
