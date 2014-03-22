@@ -12,7 +12,9 @@
   "engines": {
     "atom": ">0.60.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "emissary": "1.x"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",

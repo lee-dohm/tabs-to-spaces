@@ -31,6 +31,7 @@ It can convert between leading tabs and spaces in the current editor window. It 
 Tabs to Spaces uses the following configuration values:
 
 * `editor.tabLength` &mdash; sets the number of space characters a tab character is equivalent to
+* `tabs-to-spaces.on-save` &mdash; if set to either "tabify" or "untabify" it performs that operation on save
 
 ### Keybinding
 
