@@ -1,6 +1,6 @@
 # Tabs to Spaces
 
-Converts between leading tabs and leading spaces.
+An Atom package for converting between leading tabs and leading spaces.
 
 ## Installation
 
@@ -31,6 +31,20 @@ It can convert between leading tabs and spaces in the current editor window. It 
 Tabs to Spaces uses the following configuration values:
 
 * `editor.tabLength` &mdash; sets the number of space characters a tab character is equivalent to
+
+### Keybinding
+
+I have not set keybindings for this package. They can easily be added by referencing the following commands:
+
+* `tabs-to-spaces:tabify`
+* `tabs-to-spaces:untabify`
+
+For example, to map the Untabify command to <kbd>⌘⌥T</kbd>:
+
+```cson
+'.editor:not(.mini)':
+  'alt-cmd-t': 'tabs-to-spaces:untabify'
+```
 
 ## Copyright
 
