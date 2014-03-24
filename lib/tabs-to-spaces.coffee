@@ -45,9 +45,9 @@ class TabsToSpaces
   handleEvents: (editor) ->
     buffer = editor.getBuffer()
     bufferSubscription = @subscribe buffer, 'will-be-saved', =>
-      if atom.config.get('tabs-to-spaces.on-save') == 'untabify'
+      if atom.config.get('tabs-to-spaces.onSave') == 'untabify'
         @untabify()
-      else if atom.config.get('tabs-to-spaces.on-save') == 'tabify'
+      else if atom.config.get('tabs-to-spaces.onSave') == 'tabify'
         @tabify()
 
     @subscribe editor, 'destroyed', ->
