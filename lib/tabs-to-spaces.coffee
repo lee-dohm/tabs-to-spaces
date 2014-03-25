@@ -10,13 +10,13 @@ class TabsToSpaces
 
   spaces = null
 
-  # Activates the package.
-  activate: ->
-    atom.workspaceView.command 'tabs-to-spaces:tabify', => @tabify()
-    atom.workspaceView.command 'tabs-to-spaces:untabify', => @untabify()
-
-    @subscribe atom.workspace.eachEditor (editor) =>
-      @handleEvents(editor)
+  # # Activates the package.
+  # activate: ->
+  #   atom.workspaceView.command 'tabs-to-spaces:tabify', => @tabify()
+  #   atom.workspaceView.command 'tabs-to-spaces:untabify', => @untabify()
+  #
+  #   @subscribe atom.workspace.eachEditor (editor) =>
+  #     @handleEvents(editor)
 
   # Converts all leading spaces to tabs in the current buffer.
   tabify: ->
@@ -102,4 +102,4 @@ class TabsToSpaces
   setSpaces: (spcs) ->
     spaces = spcs
 
-module.exports = new TabsToSpaces
+module.exports = TabsToSpaces
