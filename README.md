@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lee-dohm/tabs-to-spaces.svg?branch=master)](https://travis-ci.org/lee-dohm/tabs-to-spaces)
+
 # Tabs to Spaces
 
 An Atom package for converting between leading tabs and leading spaces.
