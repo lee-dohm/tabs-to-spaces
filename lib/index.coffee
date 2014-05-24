@@ -19,3 +19,6 @@ module.exports =
     atom.workspaceView.command 'tabs-to-spaces:untabify', ->
       loadModule()
       tabsToSpaces.untabify()
+
+    atom.workspace.eachEditor (editor) ->
+      tabsToSpaces.handleEvents(editor)

@@ -2,12 +2,8 @@
 # Copyright (c) 2014 by Lifted Studios. All Rights Reserved.
 #
 
-{Subscriber} = require 'emissary'
-
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
 class TabsToSpaces
-  Subscriber.includeInto(this)
-
   spaces = null
 
   # Public: Converts all leading spaces to tabs in the current buffer.
@@ -35,17 +31,11 @@ class TabsToSpaces
   # editor - {Editor} to attach the event handlers to.
   handleEvents: (editor) ->
     buffer = editor.getBuffer()
-    bufferSubscription = @subscribe buffer, 'will-be-saved', =>
+    buffer.on 'will-be-saved', =>
       if atom.config.get('tabs-to-spaces.onSave') == 'untabify'
         @untabify()
       else if atom.config.get('tabs-to-spaces.onSave') == 'tabify'
         @tabify()
-
-    @subscribe editor, 'destroyed', ->
-      bufferSubscription.off()
-
-    @subscribe buffer, 'destroyed', =>
-      @unsubscribe(buffer)
 
   # Private: Creates a string containing `text` concatenated `count` times.
   #

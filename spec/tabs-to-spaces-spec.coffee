@@ -91,3 +91,16 @@ describe 'Tabs to Spaces', ->
       editor.insertText('\t\tfoo\n\t\tbar\n\n')
       atom.workspaceView.trigger 'tabs-to-spaces:untabify'
       expect(editor.getText()).toBe '    foo\n    bar\n\n'
+
+  describe 'on save', ->
+    it 'will untabify before an editor saves a buffer', ->
+      atom.config.set('tabs-to-spaces.onSave', 'untabify')
+      editor.insertText('\t\tfoo\n\t\tbar\n\n')
+      editor.save()
+      expect(editor.getText()).toBe '    foo\n    bar\n\n'
+
+    it 'will tabify before an editor saves a buffer', ->
+      atom.config.set('tabs-to-spaces.onSave', 'tabify')
+      editor.insertText('    foo\n    bar\n\n')
+      editor.save()
+      expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
