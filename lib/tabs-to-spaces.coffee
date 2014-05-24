@@ -3,38 +3,29 @@
 #
 
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
+module.exports =
 class TabsToSpaces
   spaces = null
 
   # Public: Converts all leading spaces to tabs in the current buffer.
-  tabify: ->
-    editor = atom.workspace.getActiveEditor()
+  tabify: (editor=atom.workspace.getActiveEditor()) ->
     return unless editor?
-
-    @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
-    buffer = editor.buffer
-
-    @replaceSpacesWithTabs(buffer)
+    @replaceSpacesWithTabs(editor.buffer)
 
   # Public: Converts all leading tabs to spaces in the current editor.
-  untabify: ->
-    editor = atom.workspace.getActiveEditor()
+  untabify: (editor=atom.workspace.getActiveEditor()) ->
     return unless editor?
+    @replaceTabsWithSpaces(editor.buffer)
 
-    @setSpaces(@multiplyText(' ', atom.config.get('editor.tabLength')))
-    buffer = editor.buffer
-
-    @replaceTabsWithSpaces(buffer)
-
-  # Private: Sets up event handlers.
+  # Internal: Sets up event handlers.
   #
   # editor - {Editor} to attach the event handlers to.
   handleEvents: (editor) ->
     buffer = editor.getBuffer()
     buffer.on 'will-be-saved', =>
-      if atom.config.get('tabs-to-spaces.onSave') == 'untabify'
+      if atom.config.get('tabs-to-spaces.onSave') is 'untabify'
         @untabify()
-      else if atom.config.get('tabs-to-spaces.onSave') == 'tabify'
+      else if atom.config.get('tabs-to-spaces.onSave') is 'tabify'
         @tabify()
 
   # Private: Creates a string containing `text` concatenated `count` times.
@@ -51,17 +42,29 @@ class TabsToSpaces
   #
   # buffer - {TextBuffer} containing the text to replace spaces with tabs.
   replaceSpacesWithTabs: (buffer) ->
-    @replaceTextInBuffer buffer, /^ +/g, (obj) =>
-      tabs = @multiplyText("\t", obj.matchText.length // spaces.length)
-      text = tabs + @multiplyText(' ', obj.matchText.length %% spaces.length)
-      obj.replace(text)
+    @setSpaces()
+    @replaceTextInBuffer buffer, /^ +/g, @replaceSpacesWithTabsHandler
+
+  # Private: Handles an individual replacement of spaces with tabs.
+  #
+  # obj - An {Object} conforming to the interface of the {TextBuffer::scan()} callback parameter.
+  replaceSpacesWithTabsHandler: (obj) =>
+    tabs = @multiplyText("\t", obj.matchText.length // spaces.length)
+    text = tabs + @multiplyText(' ', obj.matchText.length %% spaces.length)
+    obj.replace(text)
 
   # Private: Replaces all leading tabs with spaces in the given buffer.
   #
   # buffer - {TextBuffer} containing the text to replace tabs with spaces.
   replaceTabsWithSpaces: (buffer) ->
-    @replaceTextInBuffer buffer, /^\t+/g, (obj) =>
-      obj.replace(@multiplyText(spaces, obj.matchText.length))
+    @setSpaces()
+    @replaceTextInBuffer buffer, /^\t+/g, @replaceTabsWithSpacesHandler
+
+  # Private: Handles an individual replacement of tabs with spaces.
+  #
+  # obj - An {Object} conforming to the interface of the {TextBuffer::scan()} callback parameter.
+  replaceTabsWithSpacesHandler: (obj) =>
+    obj.replace(@multiplyText(spaces, obj.matchText.length))
 
   # Private: Replaces all text that matches the `regex` in `buffer` based on `callback`.
   #
@@ -77,6 +80,4 @@ class TabsToSpaces
   #
   # spcs - {String} to replace a single tab character with.
   setSpaces: (spcs) ->
-    spaces = spcs
-
-module.exports = TabsToSpaces
+    spaces = @multiplyText(' ', atom.config.get('editor.tabLength'))
