@@ -77,7 +77,5 @@ class TabsToSpaces
         callback(obj)
 
   # Private: Sets the number of spaces to replace a single tab character with.
-  #
-  # spcs - {String} to replace a single tab character with.
-  setSpaces: (spcs) ->
+  setSpaces: ->
     spaces = @multiplyText(' ', atom.config.get('editor.tabLength'))
