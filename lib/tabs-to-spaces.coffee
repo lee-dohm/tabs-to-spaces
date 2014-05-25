@@ -17,17 +17,6 @@ class TabsToSpaces
     return unless editor?
     @replaceTabsWithSpaces(editor.buffer)
 
-  # Internal: Sets up event handlers.
-  #
-  # editor - {Editor} to attach the event handlers to.
-  handleEvents: (editor) ->
-    buffer = editor.getBuffer()
-    buffer.on 'will-be-saved', =>
-      if atom.config.get('tabs-to-spaces.onSave') is 'untabify'
-        @untabify()
-      else if atom.config.get('tabs-to-spaces.onSave') is 'tabify'
-        @tabify()
-
   # Private: Creates a string containing `text` concatenated `count` times.
   #
   # text - {String} to repeat.

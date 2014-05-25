@@ -5,11 +5,6 @@
 TabsToSpaces = null
 tabsToSpaces = null
 
-# Loads the module on-demand.
-loadModule = ->
-  TabsToSpaces ?= require './tabs-to-spaces'
-  tabsToSpaces ?= new TabsToSpaces()
-
 module.exports =
   activate: ->
     atom.workspaceView.command 'tabs-to-spaces:tabify', ->
@@ -21,4 +16,22 @@ module.exports =
       tabsToSpaces.untabify()
 
     atom.workspace.eachEditor (editor) ->
-      tabsToSpaces.handleEvents(editor)
+      handleEvents(editor)
+
+# Internal: Sets up event handlers.
+#
+# editor - {Editor} to attach the event handlers to.
+handleEvents = (editor) ->
+  buffer = editor.getBuffer()
+  buffer.on 'will-be-saved', ->
+    if atom.config.get('tabs-to-spaces.onSave') is 'untabify'
+      loadModule()
+      tabsToSpaces.untabify()
+    else if atom.config.get('tabs-to-spaces.onSave') is 'tabify'
+      loadModule()
+      tabsToSpaces.tabify()
+
+# Internal: Loads the module on-demand.
+loadModule = ->
+  TabsToSpaces ?= require './tabs-to-spaces'
+  tabsToSpaces ?= new TabsToSpaces()
