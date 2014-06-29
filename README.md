@@ -32,7 +32,7 @@ It can convert between leading tabs and spaces in the current editor window. It 
 
 Tabs to Spaces uses the following configuration values:
 
-* `editor.tabLength` &mdash; sets the number of space characters a tab character is equivalent to
+* `editor.getTabLength()` &mdash; sets the number of space characters a tab character is equivalent to
 * `tabs-to-spaces.onSave` &mdash; if set to either "tabify" or "untabify" it performs that operation on save
     * Previously this was named `on-save`, but this conflicts with the humanizing algorithm used for configuration options, so it was changed to follow the standard.
 
@@ -43,7 +43,7 @@ I have not set keybindings for this package. They can easily be added by referen
 * `tabs-to-spaces:tabify`
 * `tabs-to-spaces:untabify`
 
-For example, to map the Untabify command to <kbd>⌘⌥T</kbd>:
+For example, to map the Untabify command to <kbd>Cmd+Alt+T</kbd>:
 
 ```cson
 '.editor:not(.mini)':
@@ -52,4 +52,4 @@ For example, to map the Untabify command to <kbd>⌘⌥T</kbd>:
 
 ## Copyright
 
-Copyright &copy; 2014 by Lee Dohm, Lifted Studios. See [LICENSE](https://github.com/lee-dohm/tabs-to-spaces/blob/master/LICENSE.md) for details.
+Copyright &copy; 2014 by [Lee Dohm](http://www.lee-dohm.com). See [LICENSE](https://github.com/lee-dohm/tabs-to-spaces/blob/master/LICENSE.md) for details.
