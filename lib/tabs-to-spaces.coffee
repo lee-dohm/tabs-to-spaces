@@ -8,14 +8,14 @@ class TabsToSpaces
   spaces = null
 
   # Public: Converts all leading spaces to tabs in the current buffer.
-  tabify: (editor=atom.workspace.getActiveEditor()) ->
-    return unless editor?
-    @replaceSpacesWithTabs(editor.buffer)
+  tabify: (@editor=atom.workspace.getActiveEditor()) ->
+    return unless @editor?
+    @replaceSpacesWithTabs(@editor.buffer)
 
   # Public: Converts all leading tabs to spaces in the current editor.
-  untabify: (editor=atom.workspace.getActiveEditor()) ->
-    return unless editor?
-    @replaceTabsWithSpaces(editor.buffer)
+  untabify: (@editor=atom.workspace.getActiveEditor()) ->
+    return unless @editor?
+    @replaceTabsWithSpaces(@editor.buffer)
 
   # Private: Creates a string containing `text` concatenated `count` times.
   #
@@ -67,4 +67,4 @@ class TabsToSpaces
 
   # Private: Sets the number of spaces to replace a single tab character with.
   setSpaces: ->
-    spaces = @multiplyText(' ', atom.config.get('editor.tabLength'))
+    spaces = @multiplyText(' ', @editor.getTabLength())

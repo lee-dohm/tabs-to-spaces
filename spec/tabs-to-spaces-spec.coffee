@@ -14,11 +14,13 @@ describe 'Tabs to Spaces', ->
     filePath = path.join(directory, 'tabs-to-spaces.txt')
     fs.writeFileSync(filePath, '')
     fs.writeFileSync(path.join(directory, 'sample.txt'), 'Some text.\n')
+    atom.config.set('editor.tabLength', 3)
 
     waitsForPromise ->
       atom.workspace.open(filePath).then (e) ->
         editor = e
         buffer = editor.getBuffer()
+        editor.setTabLength(2)
 
     waitsForPromise ->
       atom.packages.activatePackage('tabs-to-spaces')
@@ -39,25 +41,25 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe 'foo  bar  baz'
 
     it 'converts one tab worth of spaces to a tab', ->
-      atom.config.set('editor.tabLength', 2)
+      editor.setTabLength(2)
       editor.insertText('  foo')
       atom.workspaceView.trigger 'tabs-to-spaces:tabify'
       expect(editor.getText()).toBe '\tfoo'
 
     it 'converts almost two tabs worth of spaces to one tab and some spaces', ->
-      atom.config.set('editor.tabLength', 4)
+      editor.setTabLength(4)
       editor.insertText('       foo')
       atom.workspaceView.trigger 'tabs-to-spaces:tabify'
       expect(editor.getText()).toBe '\t   foo'
 
     it 'changes multiple lines of leading spaces to tabs', ->
-      atom.config.set('editor.tabLength', 4)
+      editor.setTabLength(4)
       editor.insertText('    foo\n       bar')
       atom.workspaceView.trigger 'tabs-to-spaces:tabify'
       expect(editor.getText()).toBe '\tfoo\n\t   bar'
 
     it 'leaves successive newlines alone', ->
-      atom.config.set('editor.tabLength', 2)
+      editor.setTabLength(2)
       editor.insertText('  foo\n\n  bar\n\n  baz\n\n')
       atom.workspaceView.trigger 'tabs-to-spaces:tabify'
       expect(editor.getText()).toBe '\tfoo\n\n\tbar\n\n\tbaz\n\n'
@@ -78,19 +80,19 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe 'foo\tbar\tbaz'
 
     it 'changes one tab to the correct number of spaces', ->
-      atom.config.set('editor.tabLength', 2)
+      editor.setTabLength(2)
       editor.insertText('\tfoo')
       atom.workspaceView.trigger 'tabs-to-spaces:untabify'
       expect(editor.getText()).toBe '  foo'
 
     it 'changes two tabs to the correct number of spaces', ->
-      atom.config.set('editor.tabLength', 2)
+      editor.setTabLength(2)
       editor.insertText('\t\tfoo')
       atom.workspaceView.trigger 'tabs-to-spaces:untabify'
       expect(editor.getText()).toBe '    foo'
 
     it 'changes multiple lines of leading tabs to spaces', ->
-      atom.config.set('editor.tabLength', 2)
+      editor.setTabLength(2)
       editor.insertText('\t\tfoo\n\t\tbar\n\n')
       atom.workspaceView.trigger 'tabs-to-spaces:untabify'
       expect(editor.getText()).toBe '    foo\n    bar\n\n'
