@@ -1,7 +1,7 @@
-path = require 'path'
-fs = require 'fs-plus'
+fs              = require 'fs-plus'
+path            = require 'path'
+temp            = require 'temp'
 {WorkspaceView} = require 'atom'
-temp = require 'temp'
 
 describe 'Tabs to Spaces', ->
   [editor, buffer] = []
@@ -14,8 +14,11 @@ describe 'Tabs to Spaces', ->
     filePath = path.join(directory, 'tabs-to-spaces.txt')
     fs.writeFileSync(filePath, '')
     fs.writeFileSync(path.join(directory, 'sample.txt'), 'Some text.\n')
-    editor = atom.workspace.openSync(filePath)
-    buffer = editor.getBuffer()
+
+    waitsForPromise ->
+      atom.workspace.open(filePath).then (e) ->
+        editor = e
+        buffer = editor.getBuffer()
 
     waitsForPromise ->
       atom.packages.activatePackage('tabs-to-spaces')
