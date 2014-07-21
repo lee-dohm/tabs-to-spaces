@@ -6,6 +6,9 @@ TabsToSpaces = null
 tabsToSpaces = null
 
 module.exports =
+  configDefaults:
+    onSave: ''
+    
   activate: ->
     atom.workspaceView.command 'tabs-to-spaces:tabify', ->
       loadModule()
