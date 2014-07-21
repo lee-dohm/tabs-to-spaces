@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.4.1** &mdash; *Released: 21 July 2014*
+
+* [@Zren](https://github.com/Zren) - Add default value for `onSave` so that it always shows up in the Settings View
+
 ## **v0.4.0** &mdash; *Released: 28 June 2014*
 
 * Fix #1 - Now supports editor-specific tab length settings
