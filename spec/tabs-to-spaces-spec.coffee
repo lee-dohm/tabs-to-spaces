@@ -1,4 +1,4 @@
-fs              = require 'fs-plus'
+fs              = require 'fs'
 path            = require 'path'
 temp            = require 'temp'
 {WorkspaceView} = require 'atom'

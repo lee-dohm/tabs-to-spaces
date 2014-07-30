@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.4.2** &mdash; *Released: 29 July 2014*
+
+* :bug: Fix #5 - Remove dependency on `fs-plus` because it was generating some sort of strange build error
+
 ## **v0.4.1** &mdash; *Released: 21 July 2014*
 
 * [@Zren](https://github.com/Zren) - Add default value for `onSave` so that it always shows up in the Settings View

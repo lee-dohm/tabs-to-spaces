@@ -12,7 +12,6 @@
     "emissary": "1.x"
   },
   "devDependencies": {
-    "fs-plus": "2.x",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",
