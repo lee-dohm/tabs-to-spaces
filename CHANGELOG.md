@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.5.0** &mdash; *Released: 3 October 2014*
+
+* :bug: Fix #7 - Handles any mixture of tabs or spaces at the beginning of lines
+
 ## **v0.4.2** &mdash; *Released: 29 July 2014*
 
 * :bug: Fix #5 - Remove dependency on `fs-plus` because it was generating some sort of strange build error

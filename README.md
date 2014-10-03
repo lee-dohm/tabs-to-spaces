@@ -16,7 +16,7 @@ apm install tabs-to-spaces
 
 ## Use
 
-It can convert between leading tabs and spaces in the current editor window. It can be executed from:
+It can convert between leading tabs and spaces in the current editor window. Any combination of leading whitespace is converted to all spaces (Untabify) or the maximum number of tabs and minimum number of spaces with tabs up front (Tabify) to fill the same space. It can be executed from:
 
 * Command Palette
     * `Tabs To Spaces: Tabify`

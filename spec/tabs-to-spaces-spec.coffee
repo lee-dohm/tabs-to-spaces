@@ -66,6 +66,12 @@ describe 'Tabs to Spaces', ->
       atom.workspaceView.trigger 'tabs-to-spaces:tabify'
       expect(editor.getText()).toBe '\tfoo\n\n\tbar\n\n\tbaz\n\n'
 
+    it 'changes mixed spaces and tabs to uniform whitespace', ->
+      editor.setTabLength(2)
+      buffer.setText('\t \tfoo\n')
+      atom.workspaceView.trigger 'tabs-to-spaces:tabify'
+      expect(editor.getText()).toBe '\t\t foo\n'
+
   describe 'untabify', ->
     beforeEach ->
       editor.setTabLength(3)
@@ -101,6 +107,12 @@ describe 'Tabs to Spaces', ->
       buffer.setText('\t\tfoo\n\t\tbar\n\n')
       atom.workspaceView.trigger 'tabs-to-spaces:untabify'
       expect(editor.getText()).toBe '    foo\n    bar\n\n'
+
+    it 'changes mixed spaces and tabs to uniform whitespace', ->
+      editor.setTabLength(2)
+      buffer.setText(' \t foo\n')
+      atom.workspaceView.trigger 'tabs-to-spaces:untabify'
+      expect(editor.getText()).toBe '    foo\n'
 
   describe 'on save', ->
     it 'will untabify before an editor saves a buffer', ->
