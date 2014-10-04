@@ -5,8 +5,6 @@
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
 module.exports =
 class TabsToSpaces
-  spaces = null
-
   # Public: Converts all leading spaces to tabs in the current buffer.
   tabify: (@editor=atom.workspace.getActiveEditor()) ->
     return unless @editor?
