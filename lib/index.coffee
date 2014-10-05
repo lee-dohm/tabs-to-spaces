@@ -6,8 +6,11 @@ TabsToSpaces = null
 tabsToSpaces = null
 
 module.exports =
-  configDefaults:
-    onSave: ''
+  config:
+    onSave:
+      type: 'string'
+      default: 'none'
+      enum: ['none', 'tabify', 'untabify']
 
   activate: ->
     atom.workspaceView.command 'tabs-to-spaces:tabify', ->
@@ -27,12 +30,13 @@ module.exports =
 handleEvents = (editor) ->
   buffer = editor.getBuffer()
   buffer.on 'will-be-saved', ->
-    if atom.config.get('tabs-to-spaces.onSave') is 'untabify'
-      loadModule()
-      tabsToSpaces.untabify()
-    else if atom.config.get('tabs-to-spaces.onSave') is 'tabify'
-      loadModule()
-      tabsToSpaces.tabify()
+    switch atom.config.get('tabs-to-spaces.onSave')
+      when 'untabify'
+        loadModule()
+        tabsToSpaces.untabify()
+      when 'tabify'
+        loadModule()
+        tabsToSpaces.tabify()
 
 # Internal: Loads the module on-demand.
 loadModule = ->
