@@ -1,7 +1,7 @@
 {
   "name": "tabs-to-spaces",
   "main": "./lib/index",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Provides the ability to convert between leading tabs and spaces in a document",
   "repository": "https://github.com/lee-dohm/tabs-to-spaces",
   "license": "MIT",
