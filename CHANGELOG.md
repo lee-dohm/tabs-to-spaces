@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## **master** &mdash; *Unreleased*
+## **v0.6.0** &mdash; *Released: 11 October 2014*
 
 * Add support for language-specific configuration for `onSave` [#9](https://github.com/lee-dohm/tabs-to-spaces/issues/9)
 
