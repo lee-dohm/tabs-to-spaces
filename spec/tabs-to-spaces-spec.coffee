@@ -4,7 +4,7 @@ temp            = require 'temp'
 {WorkspaceView} = require 'atom'
 
 describe 'Tabs to Spaces', ->
-  [editor, buffer] = []
+  [buffer, directory, editor] = []
 
   beforeEach ->
     directory = temp.mkdirSync()
@@ -13,7 +13,7 @@ describe 'Tabs to Spaces', ->
     atom.workspace = atom.workspaceView.model
     filePath = path.join(directory, 'tabs-to-spaces.txt')
     fs.writeFileSync(filePath, '')
-    fs.writeFileSync(path.join(directory, 'sample.txt'), 'Some text.\n')
+    atom.config.set('editor.tabLength', 4)
 
     waitsForPromise ->
       atom.workspace.open(filePath).then (e) -> editor = e
@@ -23,6 +23,9 @@ describe 'Tabs to Spaces', ->
 
     waitsForPromise ->
       atom.packages.activatePackage('tabs-to-spaces')
+
+    waitsForPromise ->
+      atom.packages.activatePackage('language-javascript')
 
   describe 'tabify', ->
     beforeEach ->
@@ -115,14 +118,35 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe '    foo\n'
 
   describe 'on save', ->
+    beforeEach ->
+      atom.config.set('tabs-to-spaces.onSave', 'none')
+
     it 'will untabify before an editor saves a buffer', ->
       atom.config.set('tabs-to-spaces.onSave', 'untabify')
       buffer.setText('\t\tfoo\n\t\tbar\n\n')
       editor.save()
-      expect(editor.getText()).toBe '    foo\n    bar\n\n'
+      expect(editor.getText()).toBe '        foo\n        bar\n\n'
 
     it 'will tabify before an editor saves a buffer', ->
       atom.config.set('tabs-to-spaces.onSave', 'tabify')
-      buffer.setText('    foo\n    bar\n\n')
+      buffer.setText('        foo\n        bar\n\n')
       editor.save()
       expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
+
+    describe 'with scope-specific configuration', ->
+      beforeEach ->
+        atom.config.set('.text.plain', 'editor.tabLength', 2)
+        atom.config.set('.text.plain', 'tabs-to-spaces.onSave', 'tabify')
+        filePath = path.join(directory, 'sample.txt')
+        fs.writeFileSync(filePath, 'Some text.\n')
+
+        waitsForPromise ->
+          atom.workspace.open(filePath).then (e) -> editor = e
+
+        runs ->
+          buffer = editor.getBuffer()
+
+      it 'respects the overridden configuration', ->
+        buffer.setText('    foo\n    bar\n\n')
+        editor.save()
+        expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
