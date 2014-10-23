@@ -4,7 +4,7 @@ temp            = require 'temp'
 {WorkspaceView} = require 'atom'
 
 describe 'Tabs to Spaces', ->
-  [buffer, directory, editor] = []
+  [buffer, directory, editor, filePath] = []
 
   beforeEach ->
     directory = temp.mkdirSync()
@@ -150,3 +150,11 @@ describe 'Tabs to Spaces', ->
         buffer.setText('    foo\n    bar\n\n')
         editor.save()
         expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
+
+      it 'does not modify the contents of the user configuration file', ->
+        spyOn(atom.config, 'getUserConfigPath').andReturn(filePath)
+        spyOn(editor, 'getPath').andReturn(filePath)
+
+        buffer.setText('    foo\n    bar\n\n')
+        editor.save()
+        expect(editor.getText()).toBe '    foo\n    bar\n\n'

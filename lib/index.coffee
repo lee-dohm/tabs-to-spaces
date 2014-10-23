@@ -30,6 +30,8 @@ module.exports =
 handleEvents = (editor) ->
   buffer = editor.getBuffer()
   buffer.on 'will-be-saved', ->
+    return if editor.getPath() is atom.config.getUserConfigPath()
+
     grammar = editor.getGrammar()
     switch atom.config.get([".#{grammar.scopeName}"], 'tabs-to-spaces.onSave')
       when 'untabify'

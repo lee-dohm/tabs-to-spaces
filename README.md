@@ -41,6 +41,8 @@ The package also supports language-specific configuration for the `onSave` setti
     'onSave': 'none'
 ```
 
+No matter what `tabs-to-spaces.onSave` settings you configure, your `config.cson` will not be automatically tabified or untabified.
+
 ### Keybindings
 
 Keybindings have not been set for this package. They can easily be added by referencing the commands listed above.
