@@ -12,24 +12,26 @@ module.exports =
       default: 'none'
       enum: ['none', 'tabify', 'untabify']
 
+  # Public: Activates the package.
   activate: ->
-    atom.workspaceView.command 'tabs-to-spaces:tabify', ->
-      loadModule()
-      tabsToSpaces.tabify()
+    atom.commands.add 'atom-workspace',
+      'tabs-to-spaces:tabify': ->
+        loadModule()
+        tabsToSpaces.tabify()
 
-    atom.workspaceView.command 'tabs-to-spaces:untabify', ->
-      loadModule()
-      tabsToSpaces.untabify()
+      'tabs-to-spaces:untabify': ->
+        loadModule()
+        tabsToSpaces.untabify()
 
-    atom.workspace.eachEditor (editor) ->
+    atom.workspace.observeTextEditors (editor) ->
       handleEvents(editor)
 
-# Internal: Sets up event handlers.
+# Private: Creates event handlers.
 #
-# editor - {Editor} to attach the event handlers to.
+# * `editor` {TextEditor} to attach the event handlers to
 handleEvents = (editor) ->
   buffer = editor.getBuffer()
-  buffer.on 'will-be-saved', ->
+  buffer.onWillSave ->
     return if editor.getPath() is atom.config.getUserConfigPath()
 
     grammar = editor.getGrammar()
@@ -41,7 +43,7 @@ handleEvents = (editor) ->
         loadModule()
         tabsToSpaces.tabify()
 
-# Internal: Loads the module on-demand.
+# Private: Loads the module on-demand.
 loadModule = ->
   TabsToSpaces ?= require './tabs-to-spaces'
   tabsToSpaces ?= new TabsToSpaces()
