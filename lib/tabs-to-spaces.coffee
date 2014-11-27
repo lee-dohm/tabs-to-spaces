@@ -34,7 +34,7 @@ class TabsToSpaces
 
     count
 
-  # Private: Creates a string containing `text` concatenated `count` times.
+  # Private: Creates a string containing `text` repeated `count` times.
   #
   # * `text` {String} to repeat.
   # * `count` {Number} of times to repeat.
