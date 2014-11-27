@@ -22,10 +22,12 @@ class TabsToSpaces
   # Returns the {Number} of spaces represented.
   countSpaces: (text) ->
     count = 0
-    for i in [0..text.length]
-      switch text[i]
+    tabLength = @editor.getTabLength()
+
+    for ch in text
+      switch ch
         when ' ' then count += 1
-        when '\t' then count += @editor.getTabLength()
+        when '\t' then count += tabLength
 
     count
 
