@@ -1,7 +1,0 @@
---name 'Tabs to Spaces'
---readme README.md
---title 'Tabs to Spaces Documentation'
---quiet
-./lib
--
-LICENSE.md
