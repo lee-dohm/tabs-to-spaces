@@ -1,6 +1,9 @@
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
 module.exports =
 class TabsToSpaces
+  # Private: Regular expression for matching leading whitespace on a line.
+  leadingWhitespace: /^[ \t]+/g
+
   # Public: Converts all leading spaces to tabs in the current buffer.
   #
   # * `editor` (optional) {TextEditor} to tabify. Defaults to the active editor.
@@ -45,7 +48,7 @@ class TabsToSpaces
   # * `buffer` {TextBuffer} in which to perform the replacement.
   replaceWhitespaceWithSpaces: (buffer) ->
     buffer.transact =>
-      buffer.scan /^([ \t]+)/g, ({match, replace}) =>
+      buffer.scan @leadingWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
         replace("#{@multiplyText(' ', count)}")
 
@@ -58,7 +61,7 @@ class TabsToSpaces
   # * `buffer` {TextBuffer} in which to perform the replacement.
   replaceWhitespaceWithTabs: (buffer) ->
     buffer.transact =>
-      buffer.scan /^([ \t]+)/g, ({match, replace}) =>
+      buffer.scan @leadingWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
         tabs = count // @editor.getTabLength()
         spaces = count %% @editor.getTabLength()
