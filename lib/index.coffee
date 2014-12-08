@@ -10,7 +10,7 @@ module.exports =
 
   # Public: Activates the package.
   activate: ->
-    atom.commands.add 'atom-workspace',
+    @commands = atom.commands.add 'atom-workspace',
       'tabs-to-spaces:tabify': =>
         @loadModule()
         tabsToSpaces.tabify()
@@ -19,8 +19,12 @@ module.exports =
         @loadModule()
         tabsToSpaces.untabify()
 
-    atom.workspace.observeTextEditors (editor) =>
+    @editorObserver = atom.workspace.observeTextEditors (editor) =>
       @handleEvents(editor)
+
+  deactivate: ->
+    @commands.dispose()
+    @editorObserver.dispose()
 
   # Private: Creates event handlers.
   #
@@ -29,8 +33,7 @@ module.exports =
     editor.getBuffer().onWillSave =>
       return if editor.getPath() is atom.config.getUserConfigPath()
 
-      grammar = editor.getGrammar()
-      switch atom.config.get([".#{grammar.scopeName}"], 'tabs-to-spaces.onSave')
+      switch atom.config.get(editor.getRootScopeDescriptor(), 'tabs-to-spaces.onSave')
         when 'untabify'
           @loadModule()
           tabsToSpaces.untabify()

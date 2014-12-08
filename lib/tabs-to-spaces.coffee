@@ -7,14 +7,14 @@ class TabsToSpaces
   # Public: Converts all leading spaces to tabs in the current buffer.
   #
   # * `editor` (optional) {TextEditor} to tabify. Defaults to the active editor.
-  tabify: (@editor=atom.workspace.getActiveEditor()) ->
+  tabify: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
     @replaceWhitespaceWithTabs(@editor.buffer)
 
   # Public: Converts all leading tabs to spaces in the current editor.
   #
   # * `editor` (optional) {TextEditor} to untabify. Defaults to the active editor.
-  untabify: (@editor=atom.workspace.getActiveEditor()) ->
+  untabify: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
     @replaceWhitespaceWithSpaces(@editor.buffer)
 

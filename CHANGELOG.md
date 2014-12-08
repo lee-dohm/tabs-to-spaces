@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.8.0** &mdash; *Released: 7 December 2014*
+
+* Cleaned up all deprecations
+
 ## **v0.7.1** &mdash; *Released: 22 October 2014*
 
 * [#11](https://github.com/lee-dohm/tabs-to-spaces/issues/11) - Disable onSave tabification or untabification of `config.cson`
