@@ -33,7 +33,7 @@ module.exports =
     editor.getBuffer().onWillSave =>
       return if editor.getPath() is atom.config.getUserConfigPath()
 
-      switch atom.config.get(editor.getRootScopeDescriptor(), 'tabs-to-spaces.onSave')
+      switch atom.config.get('tabs-to-spaces.onSave', scope: editor.getRootScopeDescriptor())
         when 'untabify'
           @loadModule()
           tabsToSpaces.untabify()

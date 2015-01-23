@@ -1,7 +1,6 @@
 fs              = require 'fs'
 path            = require 'path'
 temp            = require 'temp'
-{WorkspaceView} = require 'atom'
 
 helper = require './spec-helper'
 
@@ -10,7 +9,7 @@ describe 'Tabs to Spaces', ->
 
   beforeEach ->
     directory = temp.mkdirSync()
-    atom.project.setPath(directory)
+    atom.project.setPaths(directory)
     workspaceElement = atom.views.getView(atom.workspace)
     filePath = path.join(directory, 'tabs-to-spaces.txt')
     fs.writeFileSync(filePath, '')
@@ -149,8 +148,8 @@ describe 'Tabs to Spaces', ->
 
     describe 'with scope-specific configuration', ->
       beforeEach ->
-        atom.config.set('.text.plain', 'editor.tabLength', 2)
-        atom.config.set('.text.plain', 'tabs-to-spaces.onSave', 'tabify')
+        atom.config.set('editor.tabLength', 2, scope: '.text.plain')
+        atom.config.set('tabs-to-spaces.onSave', 'tabify', scope: '.text.plain')
         filePath = path.join(directory, 'sample.txt')
         fs.writeFileSync(filePath, 'Some text.\n')
 

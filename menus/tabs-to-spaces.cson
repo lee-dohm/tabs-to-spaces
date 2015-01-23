@@ -1,7 +1,8 @@
 'context-menu':
-  '.overlayer':
-      'Tabify': 'tabs-to-spaces:tabify'
-      'Untabify': 'tabs-to-spaces:untabify'
+  'atom-text-editor, .overlayer': [
+    { label: 'Tabify', command: 'tabs-to-spaces:tabify' }
+    { label: 'Untabify', command: 'tabs-to-spaces:untabify' }
+  ]
 
 'menu': [
   {
