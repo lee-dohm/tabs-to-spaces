@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## **master** &mdash; *Unreleased*
+## **v0.8.1** &mdash; *Released: 25 January 2015*
 
 * Fixed all the latest deprecations
 
