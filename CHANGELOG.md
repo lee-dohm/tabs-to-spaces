@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## **v0.8.1** &mdash; *Released: 25 January 2015*
+## **v0.8.1** &mdash; *Released: 2 February 2015*
 
+* Updated to only support post-API-freeze versions of Atom
 * Fixed all the latest deprecations
 
 ## **v0.8.0** &mdash; *Released: 7 December 2014*
