@@ -31,6 +31,7 @@ describe 'Tabs to Spaces', ->
     it 'creates the commands', ->
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:tabify')).toBeTruthy()
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify')).toBeTruthy()
+      expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify-all')).toBeTruthy()
 
   describe 'deactivate', ->
     beforeEach ->
@@ -39,6 +40,7 @@ describe 'Tabs to Spaces', ->
     it 'destroys the commands', ->
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:tabify')).toBeFalsy()
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify')).toBeFalsy()
+      expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify-all')).toBeFalsy()
 
   describe 'tabify', ->
     beforeEach ->
@@ -128,6 +130,48 @@ describe 'Tabs to Spaces', ->
       editor.setTabLength(2)
       buffer.setText(' \t foo\n')
       atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify')
+      expect(editor.getText()).toBe '    foo\n'
+
+  describe 'untabify all', ->
+    beforeEach ->
+      editor.setTabLength(3)
+
+    it 'does not change an empty file', ->
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe ''
+
+    it 'does change tabs at the end of a string', ->
+      buffer.setText('foobarbaz\t')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe 'foobarbaz   '
+
+    it 'does change tabs in the middle of a string', ->
+      buffer.setText('foo\tbar\tbaz')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe 'foo   bar   baz'
+
+    it 'changes one tab to the correct number of spaces', ->
+      editor.setTabLength(2)
+      buffer.setText('\tfoo')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe '  foo'
+
+    it 'changes two tabs to the correct number of spaces', ->
+      editor.setTabLength(2)
+      buffer.setText('\t\tfoo')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe '    foo'
+
+    it 'changes multiple lines of leading tabs to spaces', ->
+      editor.setTabLength(2)
+      buffer.setText('\t\tfoo\n\t\tbar\n\n')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
+      expect(editor.getText()).toBe '    foo\n    bar\n\n'
+
+    it 'changes mixed spaces and tabs to uniform whitespace', ->
+      editor.setTabLength(2)
+      buffer.setText(' \t foo\n')
+      atom.commands.dispatch(workspaceElement, 'tabs-to-spaces:untabify-all')
       expect(editor.getText()).toBe '    foo\n'
 
   describe 'on save', ->

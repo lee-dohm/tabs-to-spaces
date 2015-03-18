@@ -14,14 +14,17 @@ It can also be installed from the command line with the command:
 apm install tabs-to-spaces
 ```
 
-## Use
+## Usage
 
-It can convert any form of leading whitespace to either all spaces (Untabify) or the maximum number of tabs and minimum number of spaces with tabs up front (Tabify) to fill the same space. It will also, with configuration, convert to your preferred method on save.
+It can convert any form of leading whitespace to either all spaces (Untabify) or the maximum number of tabs and minimum number of spaces with tabs up front (Tabify) to fill the same space. It can also convert all tabs in a document to spaces (Untabify All).
+
+It will also, with configuration, convert to your preferred method of leading whitespace on save.
 
 ### Commands
 
 * `tabs-to-spaces:tabify` &mdash; Converts leading whitespace to tabs
 * `tabs-to-spaces:untabify` &mdash; Converts leading whitespace to spaces
+* `tabs-to-spaces:untabify-all` &mdash; Converts all whitespace on a line to spaces
 
 ### Configuration
 

@@ -1,6 +1,9 @@
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
 module.exports =
 class TabsToSpaces
+  # Private: Regular expression for matching a chunk of whitespace on a line.
+  allWhitespace: /[ \t]+/g
+
   # Private: Regular expression for matching leading whitespace on a line.
   leadingWhitespace: /^[ \t]+/g
 
@@ -17,6 +20,13 @@ class TabsToSpaces
   untabify: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
     @replaceWhitespaceWithSpaces(@editor.buffer)
+
+  # Public: Converts all tabs to spaces in the current editor.
+  #
+  # * `editor` (optional) {TextEditor} to untabify. Defaults to the active editor.
+  untabifyAll: (@editor=atom.workspace.getActiveTextEditor()) ->
+    return unless @editor?
+    @replaceAllWhitespaceWithSpaces(@editor.buffer)
 
   # Private: Counts the number of spaces required to replicate the whitespace combination.
   #
@@ -42,6 +52,15 @@ class TabsToSpaces
   # Returns a {String} with the repeated text.
   multiplyText: (text, count) ->
     Array(count + 1).join(text)
+
+  # Private: Replaces all whitespace with the appropriate number of spaces.
+  #
+  # * `buffer` {TextBuffer} in which to perform the replacement.
+  replaceAllWhitespaceWithSpaces: (buffer) ->
+    buffer.transact =>
+      buffer.scan @allWhitespace, ({match, replace}) =>
+        count = @countSpaces(match[0])
+        replace("#{@multiplyText(' ', count)}")
 
   # Private: Replaces leading whitespace with the appropriate number of spaces.
   #

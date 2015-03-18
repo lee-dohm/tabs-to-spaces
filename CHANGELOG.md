@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.9.0** &mdash; *Released: 18 March 2015*
+
+* [#21](https://github.com/lee-dohm/tabs-to-spaces/issues/21) &mdash; Added "Untabify All" command to convert *all* tabs in a document to spaces
+
 ## **v0.8.1** &mdash; *Released: 2 February 2015*
 
 * Updated to only support post-API-freeze versions of Atom

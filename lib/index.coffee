@@ -19,6 +19,10 @@ module.exports =
         @loadModule()
         tabsToSpaces.untabify()
 
+      'tabs-to-spaces:untabify-all': =>
+        @loadModule()
+        tabsToSpaces.untabifyAll()
+
     @editorObserver = atom.workspace.observeTextEditors (editor) =>
       @handleEvents(editor)
 
