@@ -36,7 +36,7 @@ Tabs to Spaces uses the following configuration values:
 The package also supports language-specific configuration for the `onSave` setting. For example, the following configuration will tabify all file types on save except for JavaScript files:
 
 ```coffee
-'global':
+'*':
   'tabs-to-spaces':
     'onSave': 'tabify'
 '.source.js':

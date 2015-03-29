@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.9.1** &mdash; *Released: 29 March 2015*
+
+* [#27](https://github.com/lee-dohm/tabs-to-spaces/pull/27) by [@Hurtak](https://github.com/Hurtak) &mdash; Grouped context menu items into a submenu
+
 ## **v0.9.0** &mdash; *Released: 18 March 2015*
 
 * [#21](https://github.com/lee-dohm/tabs-to-spaces/issues/21) &mdash; Added "Untabify All" command to convert *all* tabs in a document to spaces

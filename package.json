@@ -6,7 +6,7 @@
   "repository": "https://github.com/lee-dohm/tabs-to-spaces",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0"
+    "atom": ">=0.188.0 <2.0.0"
   },
   "dependencies": {},
   "devDependencies": {
