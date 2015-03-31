@@ -1,7 +1,7 @@
 {
   "name": "tabs-to-spaces",
   "main": "./lib/index",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Provides the ability to convert between leading tabs and spaces in a document",
   "keywords": [
     "convert",
