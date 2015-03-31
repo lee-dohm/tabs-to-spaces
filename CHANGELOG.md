@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.9.2** &mdash; *Released: 30 March 2015*
+
+* Added keywords to the `package.json`
+
 ## **v0.9.1** &mdash; *Released: 29 March 2015*
 
 * [#27](https://github.com/lee-dohm/tabs-to-spaces/pull/27) by [@Hurtak](https://github.com/Hurtak) &mdash; Grouped context menu items into a submenu

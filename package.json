@@ -3,12 +3,17 @@
   "main": "./lib/index",
   "version": "0.9.1",
   "description": "Provides the ability to convert between leading tabs and spaces in a document",
+  "keywords": [
+    "convert",
+    "indentation",
+    "spaces",
+    "tabs"
+  ],
   "repository": "https://github.com/lee-dohm/tabs-to-spaces",
   "license": "MIT",
   "engines": {
     "atom": ">=0.188.0 <2.0.0"
   },
-  "dependencies": {},
   "devDependencies": {
     "temp": "~0.6.0"
   }
