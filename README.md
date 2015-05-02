@@ -1,18 +1,6 @@
-[![Build Status](https://travis-ci.org/lee-dohm/tabs-to-spaces.svg?branch=master)](https://travis-ci.org/lee-dohm/tabs-to-spaces)
-
-# Tabs to Spaces
+# Tabs to Spaces [![Build Status](https://travis-ci.org/lee-dohm/tabs-to-spaces.svg?branch=master)](https://travis-ci.org/lee-dohm/tabs-to-spaces) [![Dependency Status](https://david-dm.org/lee-dohm/tabs-to-spaces.svg)](https://david-dm.org/lee-dohm/tabs-to-spaces)
 
 An Atom package for converting leading whitespace to either all spaces or all tabs.
-
-## Installation
-
-The package can be installed by using the Settings screen and searching for `tabs-to-spaces`.
-
-It can also be installed from the command line with the command:
-
-```bash
-apm install tabs-to-spaces
-```
 
 ## Usage
 

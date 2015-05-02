@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.10.0** &mdash; *Released: 1 May 2015*
+
+* Clean up for Deprecation Day
+
 ## **v0.9.2** &mdash; *Released: 30 March 2015*
 
 * Added keywords to the `package.json`

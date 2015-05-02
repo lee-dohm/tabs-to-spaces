@@ -1,5 +1,5 @@
 'context-menu':
-  'atom-text-editor, .overlayer': [
+  'atom-text-editor': [
     {
       'label': 'Tabs to spaces'
       'submenu': [
