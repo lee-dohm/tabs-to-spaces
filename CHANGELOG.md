@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **master** &mdash; *Unreleased*
+
+* [#28](https://github.com/lee-dohm/tabs-to-spaces/issues/28) &mdash; Change the extension of the sample JavaScript file to prevent strange error message
+
 ## **v0.10.0** &mdash; *Released: 1 May 2015*
 
 * Clean up for Deprecation Day
