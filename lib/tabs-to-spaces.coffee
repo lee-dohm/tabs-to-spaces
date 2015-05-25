@@ -12,21 +12,21 @@ class TabsToSpaces
   # * `editor` (optional) {TextEditor} to tabify. Defaults to the active editor.
   tabify: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
-    @replaceWhitespaceWithTabs(@editor.buffer)
+    @replaceWhitespaceWithTabs(@editor)
 
   # Public: Converts all leading tabs to spaces in the current editor.
   #
   # * `editor` (optional) {TextEditor} to untabify. Defaults to the active editor.
   untabify: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
-    @replaceWhitespaceWithSpaces(@editor.buffer)
+    @replaceWhitespaceWithSpaces(@editor)
 
   # Public: Converts all tabs to spaces in the current editor.
   #
   # * `editor` (optional) {TextEditor} to untabify. Defaults to the active editor.
   untabifyAll: (@editor=atom.workspace.getActiveTextEditor()) ->
     return unless @editor?
-    @replaceAllWhitespaceWithSpaces(@editor.buffer)
+    @replaceAllWhitespaceWithSpaces(@editor)
 
   # Private: Counts the number of spaces required to replicate the whitespace combination.
   #
@@ -55,19 +55,19 @@ class TabsToSpaces
 
   # Private: Replaces all whitespace with the appropriate number of spaces.
   #
-  # * `buffer` {TextBuffer} in which to perform the replacement.
-  replaceAllWhitespaceWithSpaces: (buffer) ->
-    buffer.transact =>
-      buffer.scan @allWhitespace, ({match, replace}) =>
+  # * `editor` {TextEditor} in which to perform the replacement.
+  replaceAllWhitespaceWithSpaces: (editor) ->
+    editor.transact =>
+      editor.scan @allWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
         replace("#{@multiplyText(' ', count)}")
 
   # Private: Replaces leading whitespace with the appropriate number of spaces.
   #
-  # * `buffer` {TextBuffer} in which to perform the replacement.
-  replaceWhitespaceWithSpaces: (buffer) ->
-    buffer.transact =>
-      buffer.scan @leadingWhitespace, ({match, replace}) =>
+  # * `editor` {TextEditor} in which to perform the replacement.
+  replaceWhitespaceWithSpaces: (editor) ->
+    editor.transact =>
+      editor.scan @leadingWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
         replace("#{@multiplyText(' ', count)}")
 
@@ -77,10 +77,10 @@ class TabsToSpaces
   # requirement. It then creates a string with that number of tabs followed by that number of
   # spaces.
   #
-  # * `buffer` {TextBuffer} in which to perform the replacement.
-  replaceWhitespaceWithTabs: (buffer) ->
-    buffer.transact =>
-      buffer.scan @leadingWhitespace, ({match, replace}) =>
+  # * `editor` {TextEditor} in which to perform the replacement.
+  replaceWhitespaceWithTabs: (editor) ->
+    editor.transact =>
+      editor.scan @leadingWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
         tabs = count // @editor.getTabLength()
         spaces = count %% @editor.getTabLength()
