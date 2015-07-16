@@ -1,4 +1,9 @@
-# Tabs to Spaces [![Build Status](https://travis-ci.org/lee-dohm/tabs-to-spaces.svg?branch=master)](https://travis-ci.org/lee-dohm/tabs-to-spaces) [![Dependency Status](https://david-dm.org/lee-dohm/tabs-to-spaces.svg)](https://david-dm.org/lee-dohm/tabs-to-spaces)
+# Tabs to Spaces
+
+[![Build Status](https://img.shields.io/travis/lee-dohm/tabs-to-spaces.svg)](https://travis-ci.org/lee-dohm/tabs-to-spaces)
+[![Package Version](https://img.shields.io/apm/v/tabs-to-spaces.svg)](https://atom.io/packages/tabs-to-spaces)
+[![Package Downloads](https://img.shields.io/apm/dm/tabs-to-spaces.svg)](https://atom.io/packages/tabs-to-spaces)
+[![Dependency Status](https://img.shields.io/david/lee-dohm/tabs-to-spaces.svg)](https://david-dm.org/lee-dohm/tabs-to-spaces)
 
 An Atom package for converting leading whitespace to either all spaces or all tabs.
 
