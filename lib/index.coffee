@@ -7,6 +7,10 @@ module.exports =
       type: 'string'
       default: 'none'
       enum: ['none', 'tabify', 'untabify']
+      description: '''
+        Setting this to anything other than "none" can significantly impact the time it takes to
+        save large files.
+        '''
 
   # Public: Activates the package.
   activate: ->

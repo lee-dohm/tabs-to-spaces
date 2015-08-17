@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v0.11.1** &mdash; *Released: 17 August 2015*
+
+* Added a warning to the Settings View description for the `onSave` setting that this setting can significantly impact save performance for large files
+
 ## **v0.11.0** &mdash; *Released: 25 May 2015*
 
 * Stopped using undocumented interface
