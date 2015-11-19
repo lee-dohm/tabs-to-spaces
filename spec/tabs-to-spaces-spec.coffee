@@ -7,7 +7,7 @@ TabsToSpaces = require '../lib/tabs-to-spaces'
 helper = require './spec-helper'
 
 describe 'Tabs to Spaces', ->
-  [buffer, directory, editor, filePath, workspaceElement] = []
+  [directory, editor, filePath, workspaceElement] = []
 
   beforeEach ->
     directory = temp.mkdirSync()
@@ -18,10 +18,8 @@ describe 'Tabs to Spaces', ->
     atom.config.set('editor.tabLength', 4)
 
     waitsForPromise ->
-      atom.workspace.open(filePath).then (e) -> editor = e
-
-    runs ->
-      buffer = editor.getBuffer()
+      atom.workspace.open(filePath).then (e) ->
+        editor = e
 
     waitsForPromise ->
       atom.packages.activatePackage('tabs-to-spaces')
@@ -53,42 +51,42 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe ''
 
     it 'does not change spaces at the end of a line', ->
-      buffer.setText('foobarbaz     ')
+      editor.setText('foobarbaz     ')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe 'foobarbaz     '
 
     it 'does not change spaces in the middle of a line', ->
-      buffer.setText('foo  bar  baz')
+      editor.setText('foo  bar  baz')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe 'foo  bar  baz'
 
     it 'converts one tab worth of spaces to a tab', ->
       editor.setTabLength(2)
-      buffer.setText('  foo')
+      editor.setText('  foo')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe '\tfoo'
 
     it 'converts almost two tabs worth of spaces to one tab and some spaces', ->
       editor.setTabLength(4)
-      buffer.setText('       foo')
+      editor.setText('       foo')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe '\t   foo'
 
     it 'changes multiple lines of leading spaces to tabs', ->
       editor.setTabLength(4)
-      buffer.setText('    foo\n       bar')
+      editor.setText('    foo\n       bar')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe '\tfoo\n\t   bar'
 
     it 'leaves successive newlines alone', ->
       editor.setTabLength(2)
-      buffer.setText('  foo\n\n  bar\n\n  baz\n\n')
+      editor.setText('  foo\n\n  bar\n\n  baz\n\n')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe '\tfoo\n\n\tbar\n\n\tbaz\n\n'
 
     it 'changes mixed spaces and tabs to uniform whitespace', ->
       editor.setTabLength(2)
-      buffer.setText('\t \tfoo\n')
+      editor.setText('\t \tfoo\n')
       TabsToSpaces.tabify(editor)
       expect(editor.getText()).toBe '\t\t foo\n'
 
@@ -101,36 +99,36 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe ''
 
     it 'does not change tabs at the end of a string', ->
-      buffer.setText('foobarbaz\t')
+      editor.setText('foobarbaz\t')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe 'foobarbaz\t'
 
     it 'does not change tabs in the middle of a string', ->
-      buffer.setText('foo\tbar\tbaz')
+      editor.setText('foo\tbar\tbaz')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe 'foo\tbar\tbaz'
 
     it 'changes one tab to the correct number of spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\tfoo')
+      editor.setText('\tfoo')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe '  foo'
 
     it 'changes two tabs to the correct number of spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\t\tfoo')
+      editor.setText('\t\tfoo')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe '    foo'
 
     it 'changes multiple lines of leading tabs to spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\t\tfoo\n\t\tbar\n\n')
+      editor.setText('\t\tfoo\n\t\tbar\n\n')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe '    foo\n    bar\n\n'
 
     it 'changes mixed spaces and tabs to uniform whitespace', ->
       editor.setTabLength(2)
-      buffer.setText(' \t foo\n')
+      editor.setText(' \t foo\n')
       TabsToSpaces.untabify(editor)
       expect(editor.getText()).toBe '    foo\n'
 
@@ -143,36 +141,36 @@ describe 'Tabs to Spaces', ->
       expect(editor.getText()).toBe ''
 
     it 'does change tabs at the end of a string', ->
-      buffer.setText('foobarbaz\t')
+      editor.setText('foobarbaz\t')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe 'foobarbaz   '
 
     it 'does change tabs in the middle of a string', ->
-      buffer.setText('foo\tbar\tbaz')
+      editor.setText('foo\tbar\tbaz')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe 'foo   bar   baz'
 
     it 'changes one tab to the correct number of spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\tfoo')
+      editor.setText('\tfoo')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe '  foo'
 
     it 'changes two tabs to the correct number of spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\t\tfoo')
+      editor.setText('\t\tfoo')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe '    foo'
 
     it 'changes multiple lines of leading tabs to spaces', ->
       editor.setTabLength(2)
-      buffer.setText('\t\tfoo\n\t\tbar\n\n')
+      editor.setText('\t\tfoo\n\t\tbar\n\n')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe '    foo\n    bar\n\n'
 
     it 'changes mixed spaces and tabs to uniform whitespace', ->
       editor.setTabLength(2)
-      buffer.setText(' \t foo\n')
+      editor.setText(' \t foo\n')
       TabsToSpaces.untabifyAll(editor)
       expect(editor.getText()).toBe '    foo\n'
 
@@ -182,13 +180,13 @@ describe 'Tabs to Spaces', ->
 
     it 'will untabify before an editor saves a buffer', ->
       atom.config.set('tabs-to-spaces.onSave', 'untabify')
-      buffer.setText('\t\tfoo\n\t\tbar\n\n')
+      editor.setText('\t\tfoo\n\t\tbar\n\n')
       editor.save()
       expect(editor.getText()).toBe '        foo\n        bar\n\n'
 
     it 'will tabify before an editor saves a buffer', ->
       atom.config.set('tabs-to-spaces.onSave', 'tabify')
-      buffer.setText('        foo\n        bar\n\n')
+      editor.setText('        foo\n        bar\n\n')
       editor.save()
       expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
 
@@ -206,7 +204,7 @@ describe 'Tabs to Spaces', ->
           buffer = editor.getBuffer()
 
       it 'respects the overridden configuration', ->
-        buffer.setText('    foo\n    bar\n\n')
+        editor.setText('    foo\n    bar\n\n')
         editor.save()
         expect(editor.getText()).toBe '\t\tfoo\n\t\tbar\n\n'
 
@@ -214,6 +212,6 @@ describe 'Tabs to Spaces', ->
         spyOn(atom.config, 'getUserConfigPath').andReturn(filePath)
         spyOn(editor, 'getPath').andReturn(filePath)
 
-        buffer.setText('    foo\n    bar\n\n')
+        editor.setText('    foo\n    bar\n\n')
         editor.save()
         expect(editor.getText()).toBe '    foo\n    bar\n\n'
