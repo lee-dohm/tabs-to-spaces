@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## **v1.0.0** &mdash; *Released: 18 November 2015*
+
+* *Significant* performance improvement on large files &mdash; 2.11s &rarr; 0.448s tabifying the test file `sample/jquery-git2.js.txt`
+* Cleaned up the specs to make them less brittle
+* Updated the `onSave` configuration description to use Markdown for better emphasis
+
 ## **v0.11.1** &mdash; *Released: 17 August 2015*
 
 * Added a warning to the Settings View description for the `onSave` setting that this setting can significantly impact save performance for large files
@@ -22,7 +28,7 @@
 * [#27](https://github.com/lee-dohm/tabs-to-spaces/pull/27) by [@Hurtak](https://github.com/Hurtak) &mdash; Grouped context menu items into a submenu
 
 ## **v0.9.0** &mdash; *Released: 18 March 2015*
-
+ˆ
 * [#21](https://github.com/lee-dohm/tabs-to-spaces/issues/21) &mdash; Added "Untabify All" command to convert *all* tabs in a document to spaces
 
 ## **v0.8.1** &mdash; *Released: 2 February 2015*
