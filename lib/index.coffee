@@ -1,5 +1,4 @@
 TabsToSpaces = null
-tabsToSpaces = null
 
 module.exports =
   config:
@@ -14,15 +13,15 @@ module.exports =
     @commands = atom.commands.add 'atom-workspace',
       'tabs-to-spaces:tabify': =>
         @loadModule()
-        tabsToSpaces.tabify()
+        TabsToSpaces.tabify()
 
       'tabs-to-spaces:untabify': =>
         @loadModule()
-        tabsToSpaces.untabify()
+        TabsToSpaces.untabify()
 
       'tabs-to-spaces:untabify-all': =>
         @loadModule()
-        tabsToSpaces.untabifyAll()
+        TabsToSpaces.untabifyAll()
 
     @editorObserver = atom.workspace.observeTextEditors (editor) =>
       @handleEvents(editor)
@@ -41,12 +40,11 @@ module.exports =
       switch atom.config.get('tabs-to-spaces.onSave', scope: editor.getRootScopeDescriptor())
         when 'untabify'
           @loadModule()
-          tabsToSpaces.untabify()
+          TabsToSpaces.untabify()
         when 'tabify'
           @loadModule()
-          tabsToSpaces.tabify()
+          TabsToSpaces.tabify()
 
   # Private: Loads the module on-demand.
   loadModule: ->
     TabsToSpaces ?= require './tabs-to-spaces'
-    tabsToSpaces ?= new TabsToSpaces()

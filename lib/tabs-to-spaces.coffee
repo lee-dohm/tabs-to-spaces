@@ -1,5 +1,4 @@
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
-module.exports =
 class TabsToSpaces
   # Private: Regular expression for matching a chunk of whitespace on a line.
   allWhitespace: /[ \t]+/g
@@ -85,3 +84,5 @@ class TabsToSpaces
         tabs = count // @editor.getTabLength()
         spaces = count %% @editor.getTabLength()
         replace("#{@multiplyText('\t', tabs)}#{@multiplyText(' ', spaces)}")
+
+module.exports = new TabsToSpaces
