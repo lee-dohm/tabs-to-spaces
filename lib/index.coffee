@@ -26,6 +26,7 @@ module.exports =
     @editorObserver = atom.workspace.observeTextEditors (editor) =>
       @handleEvents(editor)
 
+  # Public: Deactivates the package.
   deactivate: ->
     @commands.dispose()
     @editorObserver.dispose()
