@@ -31,6 +31,9 @@ module.exports =
     @commands.dispose()
     @editorObserver.dispose()
 
+    # Null out to theoretically force loading a new version on upgrade
+    TabsToSpaces = null
+
   # Private: Creates event handlers.
   #
   # * `editor` {TextEditor} to attach the event handlers to
