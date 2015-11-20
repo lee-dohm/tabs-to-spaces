@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.0.1** &mdash; *Released: 19 November 2015*
+
+* [#38](https://github.com/lee-dohm/tabs-to-spaces/issues/38) &mdash; Fix crash when upgrading the package from inside Atom
+
 ## **v1.0.0** &mdash; *Released: 18 November 2015*
 
 * *Significant* performance improvement on large files &mdash; 2.11s &rarr; 0.448s tabifying the test file `sample/jquery-git2.js.txt`
