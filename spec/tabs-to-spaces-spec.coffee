@@ -29,6 +29,8 @@ describe 'Tabs to Spaces', ->
 
   describe 'activate', ->
     it 'creates the commands', ->
+      Grim = require('grim')
+      Grim.deprecate('Test')
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:tabify')).toBeTruthy()
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify')).toBeTruthy()
       expect(helper.hasCommand(workspaceElement, 'tabs-to-spaces:untabify-all')).toBeTruthy()

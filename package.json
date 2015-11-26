@@ -15,6 +15,9 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "dependencies": {
+    "grim": "^2.0.0"
+  },
   "devDependencies": {
     "temp": "~0.6.0"
   }
