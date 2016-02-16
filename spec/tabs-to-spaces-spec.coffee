@@ -215,3 +215,16 @@ describe 'Tabs to Spaces', ->
         editor.setText('    foo\n    bar\n\n')
         editor.save()
         expect(editor.getText()).toBe '    foo\n    bar\n\n'
+
+  describe 'invariants', ->
+    beforeEach ->
+      editor.setText(fs.readFileSync(__filename, 'utf8'))
+
+    it 'does not move the position of the cursor', ->
+      editor.setCursorBufferPosition([0, 5])
+      TabsToSpaces.tabify(editor)
+      TabsToSpaces.untabify(editor)
+
+      pos = editor.getCursorBufferPosition()
+      expect(pos.row).toBe 0
+      expect(pos.column).toBe 5
