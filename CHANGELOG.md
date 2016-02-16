@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.0.2** &mdash; *Released: 15 February 2016*
+
+* [#41](https://github.com/lee-dohm/tabs-to-spaces/issues41) &mdash; Revert performance improvement from v1.0.0 because it was causing cursors to get pushed to the end of the file when the contents were changed
+
 ## **v1.0.1** &mdash; *Released: 19 November 2015*
 
 * [#38](https://github.com/lee-dohm/tabs-to-spaces/issues/38) &mdash; Fix crash when upgrading the package from inside Atom
