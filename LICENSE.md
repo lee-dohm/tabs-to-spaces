@@ -1,4 +1,4 @@
-Copyright &copy; 2014-2015 [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com)
+Copyright &copy; 2014-2016 [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
