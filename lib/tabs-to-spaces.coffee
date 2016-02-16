@@ -1,10 +1,10 @@
 # Public: Handles the interface between Atom and the Tabs to Spaces package.
 class TabsToSpaces
   # Private: Regular expression for matching a chunk of whitespace on a line.
-  allWhitespace: /[ \t]+/gm
+  allWhitespace: /[ \t]+/g
 
   # Private: Regular expression for matching leading whitespace on a line.
-  leadingWhitespace: /^[ \t]+/gm
+  leadingWhitespace: /^[ \t]+/g
 
   # Public: Converts all leading spaces to tabs in the current buffer.
   #
@@ -56,25 +56,19 @@ class TabsToSpaces
   #
   # * `editor` {TextEditor} in which to perform the replacement.
   replaceAllWhitespaceWithSpaces: (editor) ->
-    originalText = editor.getText()
-    newText = originalText.replace @allWhitespace, (match) =>
-      count = @countSpaces(match)
-      @multiplyText(' ', count)
-
-    if newText isnt originalText
-      editor.setText(newText)
+    editor.transact =>
+      editor.scan @allWhitespace, ({match, replace}) =>
+        count = @countSpaces(match[0])
+        replace("#{@multiplyText(' ', count)}")
 
   # Private: Replaces leading whitespace with the appropriate number of spaces.
   #
   # * `editor` {TextEditor} in which to perform the replacement.
   replaceWhitespaceWithSpaces: (editor) ->
-    originalText = editor.getText()
-    newText = originalText.replace @leadingWhitespace, (match) =>
-      count = @countSpaces(match)
-      @multiplyText(' ', count)
-
-    if newText isnt originalText
-      editor.setText(newText)
+    editor.transact =>
+      editor.scan @leadingWhitespace, ({match, replace}) =>
+        count = @countSpaces(match[0])
+        replace("#{@multiplyText(' ', count)}")
 
   # Private: Replaces leading whitespace with the appropriate number of tabs and spaces.
   #
@@ -84,14 +78,11 @@ class TabsToSpaces
   #
   # * `editor` {TextEditor} in which to perform the replacement.
   replaceWhitespaceWithTabs: (editor) ->
-    originalText = editor.getText()
-    newText = originalText.replace @leadingWhitespace, (match) =>
-      count = @countSpaces(match)
-      tabs = count // editor.getTabLength()
-      spaces = count %% editor.getTabLength()
-      "#{@multiplyText('\t', tabs)}#{@multiplyText(' ', spaces)}"
-
-    if newText isnt originalText
-      editor.setText(newText)
+    editor.transact =>
+      editor.scan @leadingWhitespace, ({match, replace}) =>
+        count = @countSpaces(match[0])
+        tabs = count // @editor.getTabLength()
+        spaces = count %% @editor.getTabLength()
+        replace("#{@multiplyText('\t', tabs)}#{@multiplyText(' ', spaces)}")
 
 module.exports = new TabsToSpaces
