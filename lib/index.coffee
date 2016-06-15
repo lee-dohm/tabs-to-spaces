@@ -7,6 +7,10 @@ module.exports =
       default: 'none'
       enum: ['none', 'tabify', 'untabify']
       description: 'Setting this to anything other than `none` can **significantly** impact the time it takes to save large files.'
+    tabLength:
+      type: 'integer'
+      default: 2
+      description: 'Number of spaces to turn into a tab'
 
   # Public: Activates the package.
   activate: ->
