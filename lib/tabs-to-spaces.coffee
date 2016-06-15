@@ -6,6 +6,9 @@ class TabsToSpaces
   # Private: Regular expression for matching leading whitespace on a line.
   leadingWhitespace: /^[ \t]+/g
 
+  # Private: Number of spaces to convert into a tab
+  tabLength: atom.config.get('tabs-to-spaces.tabLength')
+
   # Public: Converts all leading spaces to tabs in the current buffer.
   #
   # * `editor` (optional) {TextEditor} to tabify. Defaults to the active editor.
@@ -34,12 +37,11 @@ class TabsToSpaces
   # Returns the {Number} of spaces represented.
   countSpaces: (text) ->
     count = 0
-    tabLength = @editor.getTabLength()
 
     for ch in text
       switch ch
         when ' ' then count += 1
-        when '\t' then count += tabLength
+        when '\t' then count += @tabLength
 
     count
 
@@ -81,8 +83,8 @@ class TabsToSpaces
     editor.transact =>
       editor.scan @leadingWhitespace, ({match, replace}) =>
         count = @countSpaces(match[0])
-        tabs = count // @editor.getTabLength()
-        spaces = count %% @editor.getTabLength()
+        tabs = count // @tabLength
+        spaces = count %% @tabLength
         replace("#{@multiplyText('\t', tabs)}#{@multiplyText(' ', spaces)}")
 
 module.exports = new TabsToSpaces
