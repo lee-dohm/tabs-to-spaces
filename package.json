@@ -16,6 +16,19 @@
     "atom": ">=1.5.0 <2.0.0"
   },
   "devDependencies": {
+    "rimraf": "~2.5",
     "temp": "~0.6.0"
+  },
+  "configSchema": {
+    "onSave": {
+      "type": "string",
+      "default": "none",
+      "enum": [
+        "none",
+        "tabify",
+        "untabify"
+      ],
+      "description": "Setting this to anything other than `none` can **significantly** impact the time it takes to save large files."
+    }
   }
 }

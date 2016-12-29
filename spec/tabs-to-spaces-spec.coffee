@@ -1,6 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 temp = require 'temp'
+rimraf = require 'rimraf'
 
 TabsToSpaces = require '../lib/tabs-to-spaces'
 
@@ -11,7 +12,7 @@ describe 'Tabs to Spaces', ->
 
   beforeEach ->
     directory = temp.mkdirSync()
-    atom.project.setPaths(directory)
+    atom.project.setPaths([directory])
     workspaceElement = atom.views.getView(atom.workspace)
     filePath = path.join(directory, 'tabs-to-spaces.txt')
     fs.writeFileSync(filePath, '')
@@ -26,6 +27,9 @@ describe 'Tabs to Spaces', ->
 
     waitsForPromise ->
       atom.packages.activatePackage('language-javascript')
+
+  afterEach ->
+    rimraf.sync(directory)
 
   describe 'activate', ->
     it 'creates the commands', ->
