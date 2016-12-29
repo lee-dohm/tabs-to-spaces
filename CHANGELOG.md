@@ -2,6 +2,7 @@
 
 ## **master** &mdash; *Unreleased*
 
+* [#49](https://github.com/lee-dohm/tabs-to-spaces/issues/49) &mdash; Convert to line-by-line processing for functions that work with leading whitespace because it is somewhat faster
 * Convert package code to JavaScript
 
 ## **v1.0.2** &mdash; *Released: 15 February 2016*
