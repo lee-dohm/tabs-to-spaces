@@ -22,8 +22,17 @@ export default async function () {
 
   const t3 = window.performance.now()
 
+  editor.setText(fs.readFileSync(path.join(__dirname, '../sample/jquery-git2.js.txt'), 'utf8'))
+
+  const t4 = window.performance.now()
+
+  tabsToSpaces.oldReplaceWhitespaceWithTabs(editor)
+
+  const t5 = window.performance.now()
+
   return [
-    { name: 'tabify-old', duration: t1 - t0 },
+    { name: 'tabify-old-cold', duration: t1 - t0 },
+    { name: 'tabify-old-warm', duration: t5 - t4 },
     { name: 'tabify-new', duration: t3 - t2 }
   ]
 }
