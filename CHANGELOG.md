@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **master** &mdash; *Unreleased*
+
+* Convert package code to JavaScript
+
 ## **v1.0.2** &mdash; *Released: 15 February 2016*
 
 * [#41](https://github.com/lee-dohm/tabs-to-spaces/issues41) &mdash; Revert performance improvement from v1.0.0 because it was causing cursors to get pushed to the end of the file when the contents were changed
