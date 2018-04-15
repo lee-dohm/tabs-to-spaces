@@ -220,17 +220,17 @@ describe('Tabs To Spaces', function () {
       atom.config.set('tabs-to-spaces.onSave', 'untabify')
     })
 
-    it('will untabify before an editor save a buffer', function () {
+    it('will untabify before an editor save a buffer', async function () {
       atom.config.set('tabs-to-spaces.onSave', 'untabify')
       editor.setText('\t\tfoo\n\t\tbar\n\n')
-      editor.save()
+      await editor.save()
       expect(editor.getText()).toBe('        foo\n        bar\n\n')
     })
 
-    it('will tabify before an editor saves a buffer', function () {
+    it('will tabify before an editor saves a buffer', async function () {
       atom.config.set('tabs-to-spaces.onSave', 'tabify')
       editor.setText('        foo\n        bar\n\n')
-      editor.save()
+      await editor.save()
       expect(editor.getText()).toBe('\t\tfoo\n\t\tbar\n\n')
     })
 
@@ -252,18 +252,18 @@ describe('Tabs To Spaces', function () {
         })
       })
 
-      it('respects the overridden configuration', function () {
+      it('respects the overridden configuration', async function () {
         editor.setText('    foo\n    bar\n\n')
-        editor.save()
+        await editor.save()
         expect(editor.getText()).toBe('\t\tfoo\n\t\tbar\n\n')
       })
 
-      it('does not modify the contents of the user configuration file', function () {
+      it('does not modify the contents of the user configuration file', async function () {
         spyOn(atom.config, 'getUserConfigPath').andReturn(filePath)
         spyOn(editor, 'getPath').andReturn(filePath)
 
         editor.setText('    foo\n    bar\n\n')
-        editor.save()
+        await editor.save()
         expect(editor.getText()).toBe('    foo\n    bar\n\n')
       })
     })
