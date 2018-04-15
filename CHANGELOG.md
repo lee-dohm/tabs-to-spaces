@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## **v1.0.4** &mdash; *Released: 2018-04-15*
+
+* [#52](https://github.com/lee-dohm/tabs-to-spaces/issues/52) &mdash; Handle change to async file saves in specs
+* Fix deprecation of `undo` option
+
 ## **v1.0.3** &mdash; *Released: 2016-12-29*
 
 * [#49](https://github.com/lee-dohm/tabs-to-spaces/issues/49) &mdash; Convert to line-by-line processing for functions that work with leading whitespace because it is somewhat faster
