@@ -43,6 +43,6 @@ No matter what `tabs-to-spaces.onSave` settings you configure, your `config.cson
 
 Keybindings have not been set for this package. They can easily be added by referencing the commands listed above.
 
-## Copyright
+## License
 
-Copyright &copy; 2014-2016 by [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com). See [LICENSE](https://github.com/lee-dohm/tabs-to-spaces/blob/master/LICENSE.md) for details.
+[MIT](LICENSE.md)
